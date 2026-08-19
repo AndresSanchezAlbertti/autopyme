@@ -3,6 +3,9 @@ const nextConfig = {
   output: "standalone",
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
+  async redirects() {
+    return [{ source: "/", destination: "/login", permanent: false }];
+  },
   async rewrites() {
     return [
       {
