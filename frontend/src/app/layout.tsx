@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "AutoPyme — Automatización para PyMEs",
   description: "Captá, seguí y comunicá clientes automáticamente vía WhatsApp, formularios y email.",
