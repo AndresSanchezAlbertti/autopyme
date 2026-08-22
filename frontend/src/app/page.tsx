@@ -1,7 +1,7 @@
-export const dynamic = "force-dynamic";
+"use client";
 
-import { redirect } from "next/navigation";
-
+// The middleware handles / → /dashboard redirect at runtime.
+// This file exists only to satisfy Next.js build (no static export needed).
 export default function RootPage() {
-  redirect("/dashboard");
+  return null;
 }
