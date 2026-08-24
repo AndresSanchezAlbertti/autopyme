@@ -6,7 +6,7 @@ import { StatCard } from "@/components/ui/Card";
 import { LeadStatusBadge, LeadSourceBadge } from "@/components/ui/Badge";
 import { useLeads } from "@/hooks/useLeads";
 import { timeAgo } from "@/lib/utils";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import type { Lead } from "@/types";
 
 // Mini activity item

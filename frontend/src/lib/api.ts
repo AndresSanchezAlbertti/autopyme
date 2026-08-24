@@ -1,10 +1,10 @@
 import axios, { AxiosError } from "axios";
 import Cookies from "js-cookie";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-
+// En dev: Vite proxea /api → http://localhost:8000/v1
+// En prod: Nginx proxea /api → http://localhost:8000/v1
 export const apiClient = axios.create({
-  baseURL: `${BASE_URL}/v1`,
+  baseURL: "/api",
   headers: { "Content-Type": "application/json" },
 });
 

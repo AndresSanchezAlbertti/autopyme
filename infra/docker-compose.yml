@@ -21,9 +21,8 @@ services:
       context: ../frontend
       dockerfile: Dockerfile
     container_name: autopyme_frontend
-    env_file: ../.env
     ports:
-      - "3000:3000"
+      - "3000:80"
     networks:
       - autopyme_net
     restart: unless-stopped

@@ -17,7 +17,7 @@ import { leadsApi } from "@/lib/api";
 import { useToast } from "@/components/ui/Toast";
 import { formatDate, getInitials, parseTags } from "@/lib/utils";
 import type { Lead, LeadStatus } from "@/types";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const STATUS_OPTIONS = [
   { value: "new",        label: "Nuevo"      },

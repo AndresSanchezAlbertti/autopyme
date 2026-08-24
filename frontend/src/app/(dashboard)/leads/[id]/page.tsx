@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, Phone, Mail, Tag, Edit2, Trash2,
   MessageSquare, User, Calendar, Globe
@@ -16,11 +16,11 @@ import { useLead } from "@/hooks/useLeads";
 import { leadsApi } from "@/lib/api";
 import { useToast } from "@/components/ui/Toast";
 import { formatDateTime, parseTags, getInitials } from "@/lib/utils";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 export default function LeadDetailPage() {
   const params   = useParams();
-  const router   = useRouter();
+  const navigate = useNavigate();
   const toast    = useToast();
   const id       = params.id as string;
 
@@ -34,7 +34,7 @@ export default function LeadDetailPage() {
     try {
       await leadsApi.delete(id);
       toast("Lead eliminado");
-      router.push("/leads");
+      navigate("/leads");
     } catch {
       toast("Error al eliminar el lead", "error");
     } finally {
