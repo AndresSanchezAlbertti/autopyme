@@ -86,6 +86,45 @@ async def receive_form(
     return {"status": "accepted", "lead_id": str(lead.id)}
 
 
+# ─── Facebook Messenger ───────────────────────────────────────────────────────
+
+@router.get("/messenger")
+async def verify_messenger_webhook(
+    hub_mode: str = Query(alias="hub.mode"),
+    hub_verify_token: str = Query(alias="hub.verify_token"),
+    hub_challenge: str = Query(alias="hub.challenge"),
+):
+    """Verificación del webhook por parte de Meta (Messenger)."""
+    if hub_mode == "subscribe" and hub_verify_token == settings.MESSENGER_VERIFY_TOKEN:
+        return int(hub_challenge)
+    raise HTTPException(status_code=403, detail="Token de verificación inválido")
+
+
+@router.post("/messenger", status_code=200)
+async def receive_messenger(
+    request: Request,
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Recepción de mensajes desde Facebook Messenger.
+    Meta espera siempre un 200 rápido.
+    """
+    try:
+        body = await request.json()
+        for entry in body.get("entry", []):
+            for messaging in entry.get("messaging", []):
+                sender_id = messaging.get("sender", {}).get("id")
+                message = messaging.get("message", {})
+                text = message.get("text", "")
+                if sender_id and text:
+                    print(f"[Messenger] mensaje de {sender_id}: {text[:80]}")
+                    # TODO: buscar lead por sender_id, registrar evento, responder
+    except Exception as e:
+        print(f"[Messenger webhook error] {e}")
+
+    return {"status": "ok"}
+
+
 # ─── WhatsApp Cloud API ───────────────────────────────────────────────────────
 
 @router.get("/whatsapp")

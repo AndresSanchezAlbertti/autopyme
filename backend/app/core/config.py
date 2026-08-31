@@ -25,6 +25,11 @@ class Settings(BaseSettings):
     WHATSAPP_PHONE_NUMBER_ID: str = ""
     WHATSAPP_VERIFY_TOKEN: str = ""
 
+    # Messenger
+    MESSENGER_VERIFY_TOKEN: str = ""
+    MESSENGER_PAGE_ACCESS_TOKEN: str = ""
+    MESSENGER_APP_SECRET: str = ""
+
     # SMTP
     SMTP_HOST: str = ""
     SMTP_PORT: int = 587
